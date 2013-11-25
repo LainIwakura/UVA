@@ -17,27 +17,16 @@ bool is_palindrome(string& s)
 
 bool is_mirror(Reversals& rev, string s)
 {
-	bool ret = true;
-	
-	for (int i = 0, j = s.length() - 1;; i++, j--)
-	{
-		if (i > j) break;
-		char a = s.at(i);
-		char b = s.at(j);
-		map<char,char>::iterator it = rev.find(a);
-		if (it->second == b)
-			continue;
-		else
-			ret = false;
-	}
-
-	return ret;
+	for (int i = 0; i < s.length() / 2 + s.length() % 2; i++)
+		if (s[s.length() - 1 - i] != rev[s[i]])
+			return false;
+	return true;
 }
 
 int main()
 {
-	string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-	string rever = "A   3  HIL JM O   2TUVWXY51SE Z  8 O";
+	string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+	string rever = "A   3  HIL JM O   2TUVWXY51SE Z  8 ";
 	bool is_pal, is_mir;
 	Reversals rev;
 	string s;
